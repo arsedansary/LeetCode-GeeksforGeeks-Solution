@@ -1,13 +1,9 @@
 class Solution {
-    public int findMaxConsecutiveOnes(int[] nums) {
-        int max=0;
-int sum=0;
-for(int i : nums){
-  sum=i==1?++sum:0;
-    max=Math.max(sum,max);
-}
-return max;
-        
-    }
+   public int findMaxConsecutiveOnes(int[] nums) {
+        int maxHere = 0, max = 0;
+        for (int n : nums)
+            max = Math.max(max, maxHere = n == 0 ? 0 : maxHere + 1);
+        return max; 
+    } 
 }
  
