@@ -36,8 +36,9 @@ class GFG {
 
 class Compute {
     
-    public int largest(int arr[], int n)
+   public int largest(int arr[], int n)
     {
-          return Arrays.stream(arr).max().orElse(0);
+       Arrays.sort(arr);
+       return arr[n-1];
     }
 }
