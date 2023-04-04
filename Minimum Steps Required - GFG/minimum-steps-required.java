@@ -23,17 +23,11 @@ class GFG{
 //User function Template for Java
 
 class Solution{
-	int minSteps(String str) {
-		//Write your code here
-	int count = 0;
-    int sum = str.length();
-    for (int i = 1; i < sum; i++) {
-        if (str.charAt(i) != str.charAt(i - 1))
-            count++;
+    int minSteps(String str) {
+        //Write your code here
+        int ans = 1;
+        for(int i = 0; i < str.length()-1;i++)
+        if(str.charAt(i) != str.charAt(i+1))ans++;
+        return ans/2+1;
     }
-    if(str.charAt(0)!=str.charAt(sum-1))
-        return (count)/2 +2;
-        
-    return count / 2 + 1;
-	}
 }
