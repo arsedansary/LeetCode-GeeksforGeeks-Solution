@@ -27,7 +27,8 @@ class Solution{
         //Write your code here
         int ans = 1;
         for(int i = 0; i < str.length()-1;i++)
-        if(str.charAt(i) != str.charAt(i+1))ans++;
+        if(str.charAt(i) != str.charAt(i+1))
+        ans++;
         return ans/2+1;
     }
 }
