@@ -42,37 +42,68 @@ class GfG {
 // } Driver Code Ends
 
 
-class Solution
-{
+class Solution {
+
+    // Define a custom Pair class to store the deadline and profit of a job.
+    private static class Pair {
+        int deadline;
+        int profit;
+
+        public Pair(Job job) {
+            this.deadline = job.deadline;
+            this.profit = job.profit;
+        }
+    }
+
     //Function to find the maximum profit and the number of jobs done.
-    int[] JobScheduling(Job arr[], int n) {
-        // Your code here
-        Arrays.sort(arr, (a, b) -> a.profit == b.profit ? b.deadline-a.deadline : b.profit-a.profit);
-        
-        int maxDeadline = 0;
-        
-        for(int i=0; i<n; i++){
-            maxDeadline = Math.max(maxDeadline, arr[i].deadline);
+    public int[] JobScheduling(Job arr[], int n) {
+
+        //Create a list of pairs.
+        List<Pair> v = new ArrayList<>();
+        for(int i = 0; i < n; i++){
+            v.add(new Pair(arr[i]));
         }
-        
-        boolean[] hash = new boolean[maxDeadline+1];
-        int profitCount = 0, jobCount = 0;
-        
-        for(int i=0; i<n; i++){
-            Job curr = arr[i];
-            int currDL = curr.deadline;
-            
-            while(currDL > 0 && hash[currDL]){
-                currDL--;
+
+        //Sort the list in ascending order based on the deadline.
+        Collections.sort(v, new Comparator<Pair>(){
+            @Override
+            public int compare(Pair p1, Pair p2){
+                return Integer.compare(p1.deadline, p2.deadline);
             }
-            
-            if(currDL > 0){
-                hash[currDL]=true;
-                profitCount+=curr.profit;
-                jobCount++;
+        });
+
+        //Create a min heap to store the profits in ascending order.
+        PriorityQueue<Integer> pq = new PriorityQueue<>();
+
+        //Variable to store the total number of jobs done.
+        int total = 0;
+
+        //Iterate over the list to find the maximum profit and the number of jobs done.
+        for(int i = 0; i < n; i++){
+            //If the current job can be done before its deadline, increment total and add its profit to the min heap.
+            if(total < v.get(i).deadline){
+                total++;
+                pq.add(v.get(i).profit);
+            }
+            //If the current job cannot be done before its deadline, check if its profit is greater than the minimum profit in the min heap.
+            //If it is, remove the minimum profit from the min heap and add the current job's profit to it.
+            else{
+                if(!pq.isEmpty() && pq.peek() < v.get(i).profit){
+                    pq.poll();
+                    pq.add(v.get(i).profit);
+                }
             }
         }
-        
-        return new int[]{jobCount, profitCount};
+
+        //Variable to store the maximum profit.
+        int sum = 0;
+
+        //Iterate over the min heap to find the maximum profit.
+        while(!pq.isEmpty()){
+            sum += pq.poll();
+        }
+
+        //Return the total number of jobs done and the maximum profit as an integer array.
+        return new int[]{total, sum};
     }
 }
