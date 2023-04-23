@@ -55,20 +55,26 @@ class GFG {
 // } Driver Code Ends
 
 class Solution {
+    public static int GCD(int a, int b){
+        if(a == 0) return b;
+        return GCD(b%a, a);
+    }
     public static int minimumNumber(int n, int[] arr) {
-        // code here
-        int i=0,res=0;
-        for(i=0;i<n;i++)
-        {
-            res=gcd(res,arr[i]);
+        // PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
+        // for(int i=0; i< n; i++) pq.add(arr[i]);
+        // int first = Integer.MIN_VALUE, second= Integer.MIN_VALUE;
+        // while(second!= 0){
+        //     first = pq.poll();
+        //     second = pq.poll();
+        //     if(second == 0) break;
+        //     pq.add(first-second);
+        //     pq.add(second);
+        // }
+        // return first;
+        int gcd  = arr[0];
+        for(int i=1; i<n; i++){
+            gcd = GCD(gcd, arr[i]);
         }
-        return res;
+        return gcd;
     }
-    public static int gcd(int a,int b)
-    {
-        if(b==0)
-        return a;
-        else
-        return gcd(b,a%b);
-    }
-}    
+}
