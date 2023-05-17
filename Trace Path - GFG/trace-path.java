@@ -25,33 +25,28 @@ class GFG{
 
 // User function Template for 
 
-class Solution{
-   static int isPossible(int n, int m, String s){
-       int a=0, b=0, c=0, d=0;
-       for(int i=0;i<s.length();i++){
-           if(s.charAt(i)=='L'){
-               a++;
-               if(b!=0)
-               b--;
-           }
-           else if(s.charAt(i)=='R'){
-               b++;
-               if(a!=0)
-               a--;
-           }
-           else if(s.charAt(i)=='D'){
-               c++;
-               if(d!=0)
-               d--;
-           }
-           else if(s.charAt(i)=='U'){
-               d++;
-               if(c!=0)
-               c--;
-           }
-           if(a>=m || b>=m || c>=n || d>=n)
-           return 0;
-       }
-       return 1;
+public class Solution {
+    public int isPossible(int n, int m, String s) {
+        int x = 0, y = 0, maxx = 0, minx = 0, maxy = 0, miny = 0;
+        for (char c : s.toCharArray()) {
+            if (c == 'L')
+                x--;
+            else if (c == 'R')
+                x++;
+            else if (c == 'U')
+                y++;
+            else if (c == 'D')
+                y--;
+
+            maxx = Math.max(maxx, x);
+            maxy = Math.max(maxy, y);
+            minx = Math.min(minx, x);
+            miny = Math.min(miny, y);
+        }
+        if ((maxx - minx) < m && (maxy - miny) < n)
+            return 1;
+
+        return 0;
     }
 }
+
