@@ -26,37 +26,42 @@ class GFG {
 
 //User function Template for Java
 
-class Solution{
-    ArrayList<String> CamelCase(int N,String[] Dictionary,String Pattern){
-        Map<Integer, String> map = new HashMap<>();
-         ArrayList<String> list = new ArrayList<>();
-         for (int i = 0; i < Dictionary.length; i++) {
-             String str = "";
-             for (int j = 0; j < Dictionary[i].length(); j++) {
-                 if (Dictionary[i].charAt(j) >= 65 && Dictionary[i].charAt(j) <= 90) {
-                     str += Dictionary[i].charAt(j);
-                 }
-             }
-             map.put(i, str);
-              boolean b=false;
-        for(int p=0;p<Pattern.length();p++)
-        {
-
-            if(str.length()>p&&Pattern.charAt(p)==str.charAt(p))
-                b=true;
-            else{
-                b=false;
-                break;
+class Solution {
+    ArrayList<String> CamelCase(int N, String[] Dictionary, String Pattern) {
+        ArrayList<String> ans = new ArrayList<>();
+        
+        for (String word : Dictionary) {
+            if (isPatternMatch(word, Pattern)) {
+                ans.add(word);
             }
-
-
         }
-        if (b==true)
-            list.add(Dictionary[i]);
-         }
-         if (list.isEmpty())
-             list.add(String.valueOf(-1));
-         Collections.sort(list);
-         return list;
-}
+        
+        Collections.sort(ans);
+        
+        if (ans.isEmpty()) {
+            ans.add("-1");
+        }
+        
+        return ans;
+    }
+    
+    boolean isPatternMatch(String word, String Pattern) {
+        if (word.length() < Pattern.length()) {
+            return false;
+        }
+        
+        int i = 0, j = 0;
+        
+        while (i < word.length() && j < Pattern.length()) {
+            if (Character.isUpperCase(word.charAt(i))) {
+                if (word.charAt(i) != Pattern.charAt(j)) {
+                    return false;
+                }
+                j++;
+            }
+            i++;
+        }
+        
+        return j == Pattern.length();
+    }
 }
