@@ -33,13 +33,13 @@ public class GFG {
 class Solution {
     int remove_duplicate(int A[],int N){
         // code here
-       int i = 0;
-        for (int j = 1; j < A.length; j++) {
-            if (A[i] != A[j]) {
-                i++;
-                A[i] = A[j];
+       int res = 1;
+        for (int i = 1; i < A.length; i++) {
+            if (A[i] != A[res-1]) {
+               A [res] = A[i];
+               res ++;
             }
         }
-        return i + 1;
+        return res;
     }
 }
