@@ -125,37 +125,24 @@ class Node{
 */
 class Solution
 {
-    
     // returns the inorder successor of the Node x in BST (rooted at 'root')
-	public Node inorderSuccessor(Node root,Node x)
-	{
-		//add code here.
-		// inorderSuc to store the inorder Successor of the Node x.
-		Node inorderSuc = null;
-		
-		//traverse while x node is not found
-		while(root.data != x.data){
-			
-			if(x.data<root.data){	//if current node.data < x.data
-				inorderSuc = root;	//store the current node in inorderSuc 
-				root=root.left;		//move to the left node
-			}
-				
-			else
-				root=root.right;	//move to right node if current node.data > x.data
-				
-		}
-		
-		//at this point, we will have information about Node x.
-		if(root.right!=null){				//if current node has right child
-			inorderSuc=root.right;			//update inorderSuc with the right child
-			while(inorderSuc.left!=null){	//traverse till inorderSuc's left child doesn't become null.
-				inorderSuc=inorderSuc.left;
-			}
-		}
-		
-		//at this point inorderSuc will only be null if and only if Node x is the right most Node in the BST
-		return inorderSuc;
-		
-	}
+    public Node inorderSuccessor(Node root,Node x)
+         {
+          Node successor = null;
+          
+          while(root!=null){
+              if(x.data>=root.data){
+                  root = root.right;
+              }else{
+                  successor = root;
+                  root = root.left;
+              }
+          }
+          
+          return successor;
+         }
 }
+
+// T.C : O(H)
+
+// S.C = O(1)
