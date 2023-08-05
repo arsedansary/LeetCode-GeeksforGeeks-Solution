@@ -15,7 +15,7 @@ class Main {
             int edg = Integer.parseInt(st[0]);
             int nov = Integer.parseInt(st[1]);
 
-            for (int i = 0; i < nov + 1; i++)
+            for (int i = 0; i < nov; i++)
                 list.add(i, new ArrayList<Integer>());
 
             int p = 0;
@@ -58,35 +58,42 @@ class Main {
 /*Complete the function below*/
 
 
-class Solution{
-    static int[] topoSort(int V, ArrayList<ArrayList<Integer>> adj){
-        int[] indegree =new int[V];
-        
-        for(int i=0;i<V;i++){
-            for(int it:adj.get(i)){
-                indegree[it]++;
+
+
+class Solution {
+    //Function to return list containing vertices in Topological order.
+    static int[] topoSort(int V, ArrayList<ArrayList<Integer>> adj) {
+        int[] res = new int[V];
+        int[] indegree = new int[V];
+         //finding indegree
+        for (int i = 0; i < V; i++) {
+            for (int nbr : adj.get(i)) {
+                indegree[nbr]++;
             }
         }
-        
-        Queue<Integer> q=new LinkedList<>();
-        for(int i=0;i<V;i++){
-            if(indegree[i]==0){
-                q.offer(i);
+
+        Queue<Integer> q = new LinkedList<>();
+        for (int i = 0; i < V; i++) { //adding nodes to queue with indegree = 0
+            if (indegree[i] == 0) {
+                q.add(i);
             }
         }
-        
-        int[] res=new int[V];
-        int index=0;
-        while(!q.isEmpty()){
-            int curr=q.poll();
-            res[index++]=curr;
-            for(int it:adj.get(curr)){
-                indegree[it]--;
-                if(indegree[it]==0){
-                    q.offer(it);
+
+        int index = 0;
+        while (!q.isEmpty()) {
+            int curr = q.poll();
+            res[index++] = curr;
+            
+            //getting neighbour nodes of popped node and decreasing  their 
+            for (int nbr : adj.get(curr)) {
+                indegree[nbr]--;
+                if (indegree[nbr] == 0) {
+                    q.add(nbr);
                 }
             }
         }
-        return res;
+
+        return res; //printing topological ordering of nodes.
     }
 }
+
