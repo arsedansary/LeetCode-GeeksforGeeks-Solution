@@ -35,31 +35,22 @@ class GFG
 
 //User function Template for Java
 
-class Solution
-{
-    public int[] singleNumber(int[] nums)
-    {
-        int xorans = 0;
-        for (int num : nums) {
-            xorans ^= num;
-        }
+class Solution{
+   public int[] singleNumber(int[] nums) {
+        Arrays.sort(nums);
+        int arr[] = new int[2];
+        int n = 0;
         
-        int rightMostBit = xorans & ~(xorans - 1);
-        
-        int set1 = 0, set2 = 0;
-        for (int num : nums) {
-            if ((rightMostBit & num) == 0) {
-                set1 ^= num;
-            }
-            else {
-                set2 ^= num;
+        for(int i=0;i<nums.length;i++){
+            if(i < nums.length-1 && nums[i] == nums[i+1]){
+                i++;
+            } else {
+                arr[n] = nums[i];
+                n++;
             }
         }
         
-        int[] ans = new int[2];
-        ans[0] = set1;
-        ans[1] = set2;
-        Arrays.sort(ans);
-        return ans;
-    }
+        
+        return arr;
+   }
 }
