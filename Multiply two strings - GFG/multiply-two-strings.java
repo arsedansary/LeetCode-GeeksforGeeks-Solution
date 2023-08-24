@@ -21,13 +21,12 @@ class Multiply{
 
 
 //User function Template for Java
-
 class Solution
 {
     public String multiplyStrings(String s1,String s2)
-    {
-        //code here.
-        return new BigInteger(s1).multiply(new BigInteger(s2)).toString();
-        
+    {    
+        BigInteger i=new BigInteger(s1);
+        BigInteger j=new BigInteger(s2);
+        return String.valueOf(i.multiply(j));
     }
 }
