@@ -25,8 +25,8 @@ class Solution
 {
     public String multiplyStrings(String s1,String s2)
     {    
-        BigInteger i=new BigInteger(s1);
-        BigInteger j=new BigInteger(s2);
-        return String.valueOf(i.multiply(j));
+         BigInteger x= new BigInteger(s1);
+        BigInteger x1= new BigInteger(s2);
+        return ""+x.multiply(x1);
     }
 }
