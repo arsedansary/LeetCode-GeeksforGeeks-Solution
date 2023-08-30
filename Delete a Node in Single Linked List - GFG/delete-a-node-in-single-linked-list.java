@@ -86,21 +86,27 @@ class Node
 /*You are required to complete below method*/
 class GfG
 {
-    Node deleteNode(Node head, int x)
+   Node deleteNode(Node head, int x)
     {
-        Node temp=new Node(0); // reference   variable usko koi sa value se assign kr diye 
-        Node curr=temp;         // uske baad again reference varible liye temp
-        while(head!=null){
-            if(x==1){
-                head=head.next;
-            }
-            curr.next=head;
-            curr=curr.next;
-            if(head!=null)
-                head=head.next;
-            x--;
-        }
-        return temp.next;
+	// Your code here	
+	    Node curr = head;
+	    Node prev = null;
+	    
+	    // Checking > 1 as already on head node
+	    while(x > 1){
+	        prev = curr;
+	        curr = curr.next;
+	        x--;
+	    }
+	    
+	    // Prev will be null in cases where head needs to be removed
+	    if(prev != null){
+	        prev.next = curr.next;
+	    }else{
+	        head = curr.next;
+	    }
+	    
+	    return head;
     }
 }
 
