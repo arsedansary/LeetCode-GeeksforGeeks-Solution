@@ -62,21 +62,21 @@ class GFG {
 
 class Solution {
     public static int floor(Node root, int x) {
-        // Code here
-        int floor = -1;
-        while(root != null){
-            if(root.data < x){
-                floor = root.data;
-                root = root.right;
-            }
-            else if(root.data > x){
-                root = root.left;
-            }
-            else{
-                return root.data;
-            }
+        if (root == null)
+            return -1;
+        
+        if(root.data == x)
+            return x;
+        
+        else if (root.data < x) { 
+            int k = floor(root.right, x); 
+            if (k == -1) 
+                return root.data; 
+            else
+                return k; 
         }
-        return floor;
+        
+        else
+            return floor(root.left, x);
     }
 }
-
