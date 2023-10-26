@@ -28,11 +28,6 @@ class Solution
     public int minOperation(int n)
     {
         //code here.
-         if(n==0||n==1)
-            return n;
-        if(n%2==0)
-            return 1+minOperation(n/2);
-        else 
-            return 1+minOperation(n-1);
+     return (n<=3 ? n : (n%2 == 0 ? 1+minOperation(n/2) : 2+minOperation(n/2)));
     }
 }
